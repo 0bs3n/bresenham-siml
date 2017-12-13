@@ -1,4 +1,0 @@
-#!/bin/bash
-gcc line.c siml.c -o line -lm
-./line
-feh --scale-down output.png
