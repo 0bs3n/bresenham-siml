@@ -42,32 +42,15 @@ draw_line(Image *image, Color color,
 
     // if the slope is greater than 1:
     if (dy > dx) {
-        // if the slope is negative: the only difference is in the for loop
-        // check statement, checking is y >= y1 instead of y <= y1 as below.
-        // I feel like there is a solution involving swapping that doesn't require
-        // writing the algorithm twice here for such a small difference.
-        if (stepy < 0) {
-            for (y = y0; y >= y1; y+=stepy) {
-                plot(x, y, image, color);
-                err = err + dx;
-                if ((err << 1) >= dy) {
-                    x += stepx;
-                    err -= dy;
-                }
-            }
-        } 
-        // if the slope is positive 
-        else {
-            for (y = y0; y <= y1; y+=stepy) {
-                plot(x, y, image, color);
-                err += dx;
-                if ((err << 1) >= dy) {
-                    x += stepx;
-                    err -= dy;
-                }
+        for (y = y0; y <= y1; y+=stepy) {
+            plot(x, y, image, color);
+            err += dx;
+            if ((err << 1) >= dy) {
+                x += stepx;
+                err -= dy;
             }
         }
-    } 
+    }
     // if the slope is less than or equal to on, handles positive 
     // and negative slope thanks to the swap at the start
     else {
